@@ -1,0 +1,174 @@
+body {
+    background-image: url("img/pixel.gif");
+    background-attachment: fixed;
+    background-size: cover;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 50px;
+    color: aquamarine;
+}
+
+div#name {
+    text-align: center;
+    padding: 20px;
+    color: aquamarine;
+    font-size: 25px;
+    font-family: Papyrus, serif;
+
+}
+
+div.with_border {
+    border: 1px solid mediumaquamarine;
+    background: rgb(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+#main_table {
+
+    width: 100%;
+    text-align: center;
+    border-collapse: separate; /* Разделить границы столбцов и ячеек */
+    border-spacing: 10px;
+}
+
+#choose_column {
+    width: 400px;
+}
+
+#graphic_column {
+    width: 550px;
+}
+
+#result_column {
+    width: 600px;
+}
+
+
+#container_for_table {
+    margin-top: 60px;
+}
+
+#but {
+
+    display: flex;
+    flex-direction: column; /* Сделать чекбоксы вертикальным списком */
+    align-items: center;
+    margin-right: 20px;
+    /*padding-left: 70px;*/
+}
+.clickable{
+
+}
+#but label {
+    /*transform:scale(1.5);*/
+    /*opacity:0.9;*/
+    /*cursor:pointer;*/
+    display: flex;
+    /*justify-content: space-between;*/
+    margin-top: 5px;
+    width: 30px;
+}
+
+#checkboxes {
+    display: flex;
+}
+
+#checkboxes label {
+    display: block; /* Сделать каждый label блочным элементом */
+    text-align: center; /* Центрировать текст внутри label */
+
+
+}
+
+#box_within_choose_column {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center; !* Центрирование по вертикали *!*/
+    /*align-items: center; !* Центрирование по горизонтали *!*/
+}
+
+#choose_table {
+    border-spacing: 15px;
+}
+
+.column {
+    vertical-align: top;
+}
+
+#table_x {
+    width: 10%;
+}
+
+#table_y {
+    width: 10%;
+}
+
+#table_r {
+    width: 10%;
+}
+
+#table_result {
+    width: 25%;
+}
+#table_date{
+    width: 25%;
+}
+
+#table_time {
+    width: 30%
+}
+
+#box_within_graphic_column {
+    height: 500px;
+    margin: 0; /* Уберите отступы */
+    padding: 0; /* Уберите внутренние отступы */
+}
+
+#canvas_plot {
+    width: 100%;
+    height: 500px;
+    display: block;
+    margin: 0; /* Уберите отступы */
+    padding: 0; /* Уберите внутренние отступы */
+}
+
+/*div {*/
+/*    border: 1px solid aquamarine;*/
+/*}*/
+
+#final_button {
+    width: 150px;
+    height: 30px;
+    margin-top: 20px;
+}
+
+
+#last_checkbox {
+    display: flex;
+    justify-content: center;
+}
+
+#table_for_checkboxes {
+    display: flex;
+    justify-content: center;
+
+}
+label, .clickable{
+    transform:scale(1.4);
+    opacity:0.9;
+    font-size: 15px;
+}
+
+/*#box_within_results_column {*/
+/*    border: 1px solid red;*/
+
+/*}*/
+
+#table_for_results {
+    /*border: 1px solid aquamarine;*/
+    margin: 15px 5px 5px;
+}
+#errorMesssage {
+    color: red;
+}
