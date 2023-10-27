@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const scaleX = 25
     const scaleY = 13
     // TODO сделать через локальную переменную
-    const sharedData = {
-        R: 0,
-    }
+    
+    let R = 0
+    
 
-    module.exports = sharedData
+   
 
     function drawAxes() {
         ctx.beginPath()
@@ -60,17 +60,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     radioButtons.forEach((radioButton) => {
         radioButton.addEventListener('change', () => {
-            sharedData.R = radioButton.value;
+            R = radioButton.value;
             ctx.clearRect(0, 0, canvasPlot.width, canvasPlot.height);
-            console.log('Выбрана опция:', sharedData.R);
+            console.log('Выбрана опция:', R);
             ctx.fillStyle = "#5b6ca3"
             //Прямоугольник
-            ctx.fillRect(xAxis - scaleX * sharedData.R / 2, yAxis - scaleY * sharedData.R, sharedData.R / 2 * scaleX, scaleY * sharedData.R)
+            ctx.fillRect(xAxis - scaleX * R / 2, yAxis - scaleY * R, R / 2 * scaleX, scaleY * R)
             ctx.stroke();
 
             ctx.moveTo(xAxis, yAxis)
-            ctx.lineTo(xAxis + scaleX * sharedData.R, yAxis)
-            ctx.lineTo(xAxis, yAxis - scaleY * sharedData.R / 2)
+            ctx.lineTo(xAxis + scaleX * R, yAxis)
+            ctx.lineTo(xAxis, yAxis - scaleY * R / 2)
             ctx.lineTo(xAxis, yAxis)
             ctx.fill()
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const startAngle = -Math.PI * 3 / 2;
             const endAngle = -Math.PI
 
-            ctx.ellipse(xAxis, yAxis, radiusX * sharedData.R, radiusY * sharedData.R, 0, startAngle, endAngle);
+            ctx.ellipse(xAxis, yAxis, radiusX * R, radiusY * R, 0, startAngle, endAngle);
             ctx.fill();
 
 

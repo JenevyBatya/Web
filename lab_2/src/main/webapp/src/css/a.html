@@ -9,25 +9,25 @@
 <svg id="svg_graph" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
   <!-- Ось X -->
   <line x1="0" y1="200" x2="400" y2="200" stroke="black" />
-  <text x="200" y="220" text-anchor="middle">0</text>
-  <text x="100" y="220" text-anchor="middle">-1</text>
-  <text x="300" y="220" text-anchor="middle">1</text>
-  <text x="50" y="220" text-anchor="middle">-2</text>
-  <text x="150" y="220" text-anchor="middle">2</text>
-  <text x="250" y="220" text-anchor="middle">3</text>
-  <text x="350" y="220" text-anchor="middle">4</text>
-  <text x="0" y="220" text-anchor="middle">-5</text>
+  <text x="200" y="240" text-anchor="middle">0</text>
+  <text x="100" y="240" text-anchor="middle">-1</text>
+  <text x="300" y="240" text-anchor="middle">1</text>
+  <text x="50" y="240" text-anchor="middle">-2</text>
+  <text x="150" y="240" text-anchor="middle">2</text>
+  <text x="250" y="240" text-anchor="middle">3</text>
+  <text x="350" y="240" text-anchor="middle">4</text>
+  <text x="0" y="240" text-anchor="middle">-5</text>
 
   <!-- Ось Y -->
   <line x1="200" y1="0" x2="200" y2="400" stroke="black" />
-  <text x="220" y="10" text-anchor="middle">0</text>
-  <text x="220" y="100" text-anchor="middle">-1</text>
-  <text x="220" y="300" text-anchor="middle">1</text>
-  <text x="220" y="50" text-anchor="middle">-2</text>
-  <text x="220" y="150" text-anchor="middle">2</text>
-  <text x="220" y="250" text-anchor="middle">3</text>
-  <text x="220" y="350" text-anchor="middle">4</text>
-  <text x="220" y="400" text-anchor="middle">5</text>
+  <text x="240" y="10" text-anchor="middle">0</text>
+  <text x="240" y="100" text-anchor="middle">-1</text>
+  <text x="240" y="300" text-anchor="middle">1</text>
+  <text x="240" y="50" text-anchor="middle">-2</text>
+  <text x="240" y="150" text-anchor="middle">2</text>
+  <text x="240" y="250" text-anchor="middle">3</text>
+  <text x="240" y="350" text-anchor="middle">4</text>
+  <text x="240" y="400" text-anchor="middle">5</text>
 </svg>
 
 <form>
@@ -36,19 +36,13 @@
   <input type="radio" name="R" value="3"> R=3
 </form>
 
-<script>document.addEventListener("DOMContentLoaded", function () {
-  const svg = document.getElementById('svg_graph');
-  const radioButtons = document.querySelectorAll('input[type="radio"][name="R"]');
-  let R = 1;
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const svg = document.getElementById('svg_graph');
+    const radioButtons = document.querySelectorAll('input[type="radio"][name="R"]');
+    let R = 1;
 
-  function drawGraph() {
-    // Очищаем только нарисованный квадрат
-    const existingRect = document.getElementById('dynamicRect');
-    if (existingRect) {
-      svg.removeChild(existingRect);
-    }
-
-    // Ваш код для создания нового квадрата на основе значения R
+    // Создаем квадрат и круг
     const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     rect.setAttribute("id", "dynamicRect");
     rect.setAttribute("x", 100 - (R * 25) / 2);
@@ -57,18 +51,46 @@
     rect.setAttribute("height", R * 13);
     rect.setAttribute("fill", "#5b6ca3");
     svg.appendChild(rect);
-  }
 
-  // Инициализация графика
-  drawGraph();
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("id", "dynamicCircle");
+    circle.setAttribute("cx", 200);
+    circle.setAttribute("cy", 200);
+    circle.setAttribute("r", R * 25);
+    circle.setAttribute("fill", "red");
+    svg.appendChild(circle);
 
-  radioButtons.forEach((radioButton) => {
-    radioButton.addEventListener('change', () => {
-      R = radioButton.value;
-      drawGraph(); // Вызываем функцию для обновления графика при изменении R
+    function updateShapes() {
+      // Обновляем квадрат
+      const existingRect = document.getElementById('dynamicRect');
+      if (existingRect) {
+        svg.removeChild(existingRect);
+      }
+
+      rect.setAttribute("x", 100 - (R * 25) / 2);
+      rect.setAttribute("y", 200 - (R * 13));
+      rect.setAttribute("width", R * 25);
+      rect.setAttribute("height", R * 13);
+      svg.appendChild(rect);
+
+      // Обновляем круг
+      const existingCircle = document.getElementById('dynamicCircle');
+      if (existingCircle) {
+        svg.removeChild(existingCircle);
+      }
+
+      circle.setAttribute("r", R * 25);
+      svg.appendChild(circle);
+    }
+
+    radioButtons.forEach((radioButton) => {
+      radioButton.addEventListener('change', () => {
+        R = radioButton.value;
+        updateShapes(); // Обновляем квадрат и круг при изменении R
+      });
     });
   });
-});
+
 </script>
 </body>
 </html>

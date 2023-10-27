@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    // Если метод запроса не POST, возвращаем ошибку
-    http_response_code(405); // 405 Method Not Allowed
+    http_response_code(405);
     echo "Метод запроса не разрешен. Используйте POST-запрос.";
     exit;
 }
@@ -13,14 +12,14 @@ function shiftDecimalRight($inputString): float
     if (count($parts) === 2) {
         $integerPart = $parts[0];
         $decimalPart = $parts[1];
-        $newDecimalPart = "0";
+//        $newDecimalPart = "0";
 
         for ($i = 0; $i < strlen($decimalPart); $i++) {
             $char = $decimalPart[$i];
             if (is_numeric($integerPart) && is_numeric($char)) {
                 $num = intval($char);
                 if ($num > 0) {
-//                        global $newDecimalPart;
+
                     $newDecimalPart = str_repeat("0", min(5, $i)) . $char;
                     $newNumber = $integerPart . "." . $newDecimalPart;
                     break;

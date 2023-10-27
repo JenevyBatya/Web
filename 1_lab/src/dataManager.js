@@ -4,9 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updatePage(getDataFromSession())
 
-    function validate() {
-
-    }
 
     function getDataFromSession() {
 
@@ -114,7 +111,37 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     }
+    function accurateY(y) {
+        const parts = y.split(".");
+        let newNumber = "";
+        const regex = /\d+/;
 
+        if (parts.length === 2) {
+            const integerPart = parts[0];
+            const decimalPart = parts[1];
+            let newDecimalPart = "0";
+
+            for (let i = 0; i < decimalPart.length; i++) {
+                const num = decimalPart[i];
+
+                if (regex.test(num) && regex.test(integerPart)) {
+                    const intNum = parseInt(num, 10);
+
+                    if (intNum > 0) {
+                        newDecimalPart = "0".repeat(Math.min(5, i)) + num;
+                        newNumber = `${integerPart}.${newDecimalPart}`;
+                        break;
+                    }
+                } else {
+                    newNumber = "a";
+                }
+            }
+        } else {
+            newNumber = regex.test(parts[0]) ? parts[0] : "a";
+        }
+
+        return newNumber;
+    }
 
     button.addEventListener("click", function () {
 
@@ -135,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         let textInput = document.getElementById("choose_y").value
-        if (!/^(\d+|\d+\.\d+)$/.test(textInput) || parseFloat(textInput) < -3 || parseFloat(textInput) > 5) {
+        if (!/^(\d+|\d+\.\d+)$/.test(textInput) || parseFloat(accurateY(textInput)) < -3 || parseFloat(accurateY(textInput)) > 5) {
             flagInput = true
         }
         let selectedRadio = document.querySelector('input[type="radio"]:checked');
@@ -159,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let data = {
                 selectedCheckboxes: selectedValues,
                 textInput: textInput,
-                R: selectedRadio
+                R: selectedRadio.value
             };
             console.log("Sent data", data)
             fetch('validate.php', {

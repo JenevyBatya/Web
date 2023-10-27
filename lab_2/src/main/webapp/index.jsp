@@ -109,8 +109,37 @@
             </td>
             <td id="graphic_column" class="column">
                 <div id="box_within_graphic_column" class="with_border">
-                    <canvas id="canvas_plot"></canvas>
+                    <svg id="svg_graph" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ось X -->
+                        <line x1="0" y1="250" x2="500" y2="250" stroke="white"></line>
+                        <text x="0" y="240" text-anchor="middle" fill="white">-5</text>
+                        <text x="50" y="240" text-anchor="middle" fill="white">-4</text>
+                        <text x="100" y="240" text-anchor="middle" fill="white">-3</text>
+                        <text x="150" y="240" text-anchor="middle" fill="white">-2</text>
+                        <text x="200" y="240" text-anchor="middle" fill="white">-1</text>
+<%--                        <text x="250" y="240" text-anchor="middle" fill="white">0</text>--%>
+                        <text x="300" y="240" text-anchor="middle" fill="white">1</text>
+                        <text x="350" y="240" text-anchor="middle" fill="white">2</text>
+                        <text x="400" y="240" text-anchor="middle" fill="white">3</text>
+                        <text x="450" y="240" text-anchor="middle" fill="white">4</text>
+                        <text x="500" y="240" text-anchor="middle" fill="white">5</text>
 
+
+
+                        <!-- Ось Y -->
+                        <line x1="250" y1="0" x2="250" y2="500" stroke="white"></line>
+                        <text x="240" y="0" text-anchor="middle" fill="white">-5</text>
+                        <text x="240" y="50" text-anchor="middle" fill="white">-4</text>
+                        <text x="240" y="100" text-anchor="middle" fill="white">-3</text>
+                        <text x="240" y="150" text-anchor="middle" fill="white">-2</text>
+                        <text x="240" y="200" text-anchor="middle" fill="white">-1</text>
+<%--                        <text x="240" y="250" text-anchor="middle" fill="white">0</text>--%>
+                        <text x="240" y="300" text-anchor="middle" fill="white">1</text>
+                        <text x="240" y="350" text-anchor="middle" fill="white">2</text>
+                        <text x="240" y="400" text-anchor="middle" fill="white">3</text>
+                        <text x="240" y="450" text-anchor="middle" fill="white">4</text>
+                        <text x="220" y="500" text-anchor="middle" fill="white">5</text>
+                    </svg>
                 </div>
             </td>
 
