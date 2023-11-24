@@ -1,75 +1,72 @@
-import {fetchData, updatePage, updateSession, fillTable} from './dataManager';
+import {requestResponse, updatePage, updateSession, fillTable, errorRise} from './dataManager';
 import {saveData} from './saveDataBeforeReloading';
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
-    // const canvasPlot = document.getElementById('canvas_plot')
-    // const ctx = canvasPlot.getContext('2d')
-    // const canvasPlotWidth = canvasPlot.width
-    // const canvasPlotHeight = canvasPlot.height
-    // const xAxis = canvasPlotWidth / 2
-    // const yAxis = canvasPlotHeight / 2
-    // const scaleX = 25
-    // const scaleY = 13
     const svg = document.getElementById('svg_graph');
-    // TODO сделать через локальную переменную
-    // const  = {
-    //     R: 0,
-    // }
+    const svgOXY = document.getElementById("OXY")
+    const svgPoints = document.getElementById("points")
     let R = 0;
 
-    // function drawAxes() {
-    //     ctx.beginPath()
-    //     ctx.fillStyle = "#ffffff";
-    //     for (let i = 0; i <= canvasPlotWidth; i += scaleX) {
-    //         const x = i - xAxis;
-    //         if (x / scaleX === 0) {
-    //             continue
-    //         }
-    //         ctx.moveTo(i, yAxis - 3); // Нижняя черточка
-    //         ctx.lineTo(i, yAxis + 3);
-    //         ctx.fillText(x / scaleX, i - 3, yAxis + 12, 5); // Текст над черточкой
-    //     }
-    //
-    //     for (let i = 0; i <= canvasPlotHeight; i += scaleY) {
-    //         const y = yAxis - i;
-    //         if (Math.round(y / scaleY) === 0) {
-    //             continue
-    //         }
-    //         if (y !== 0) { // Пропускаем черточку в начале оси
-    //             ctx.moveTo(xAxis - 3, i - 3);
-    //             ctx.lineTo(xAxis + 3, i - 3);
-    //             ctx.fillText(Math.round(y / scaleY), xAxis + 10, i + 2, 4);
-    //         }
-    //     }
-    //     ctx.strokeStyle = '#000000'
-    //     ctx.strokeStyle = '#7FFFD4FF'
-    //     ctx.moveTo(Math.round(xAxis), Math.round(0));
-    //     ctx.lineTo(Math.round(xAxis), Math.round(canvasPlotHeight));
-    //
-    //     ctx.moveTo(Math.round(0), Math.round(yAxis));
-    //     ctx.lineTo(Math.round(canvasPlotWidth), Math.round(yAxis));
-    //     ctx.stroke()
-    //     ctx.closePath()
-    // }
-    //
-    //
-    // drawAxes()
     function drawRect(R) {
         console.log(R)
         const existingRect = document.getElementById('dynamicRect');
+        const existingCircle = document.getElementById('dynamicCircle');
+        const existingTriangle = document.getElementById('dynamicTriangle');
         if (existingRect) {
             svg.removeChild(existingRect);
         }
+        if (existingCircle) {
+            svg.removeChild(existingCircle)
+        }
+        if (existingTriangle) {
+            svg.removeChild(existingTriangle)
+        }
         const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        const triangle = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+
         rect.setAttribute("id", "dynamicRect");
-        rect.setAttribute("x", 250 - (R * 50 * 0.5));
-        rect.setAttribute("y", 250 - R * 50);
-        rect.setAttribute("width", R * 50 * 0.5);
-        rect.setAttribute("height", R * 50);
+        rect.setAttribute("x", 250);
+        rect.setAttribute("y", 250 - R * 50 * 0.5);
+        rect.setAttribute("width", R * 50);
+        rect.setAttribute("height", R * 50 * 0.5);
         rect.setAttribute("fill", "#5b6ca3");
         svg.appendChild(rect);
+
+        circle.setAttribute("id", "dynamicCircle");
+        const x = 250; // Координаты центра круга
+        const y = 250;
+        const radius = R * 25; // Радиус
+        const startAngle = 0; // Начальный угол в градусах (0 градусов)
+        const endAngle = 90; // Угол окончания (чтобы нарисовать четверть круга - 90 градусов)
+        const largeArcFlag = 0; // 0, так как мы рисуем четверть круга
+        const sweepFlag = 1; // 1, чтобы нарисовать по часовой стрелке
+
+// Рассчитываем координаты для начальной точки дуги
+        const startX = x + radius * Math.cos(startAngle * (Math.PI / 180));
+        const startY = y + radius * Math.sin(startAngle * (Math.PI / 180));
+
+// Рассчитываем координаты для конечной точки дуги
+        const endX = x + radius * Math.cos(endAngle * (Math.PI / 180));
+        const endY = y + radius * Math.sin(endAngle * (Math.PI / 180));
+
+        const d = `M ${x} ${y} L ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} ${sweepFlag} ${endX} ${endY} Z`;
+        circle.setAttribute("d", d);
+        circle.setAttribute("fill", "#5b6ca3");
+        svg.appendChild(circle);
+
+        triangle.setAttribute("id", "dynamicTriangle")
+        let x1 = 250 - 50 * R
+        let y1 = 250
+        let x2 = 250
+        let y2 = 250
+        let x3 = 250
+        let y3 = 250 + 50 * R * 0.5
+        triangle.setAttribute("points", x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3)
+        triangle.setAttribute("fill", "#5b6ca3")
+        svg.appendChild(triangle)
+
     }
 
 
@@ -78,33 +75,73 @@ document.addEventListener("DOMContentLoaded", function () {
     radioButtons.forEach((radioButton) => {
         radioButton.addEventListener('change', () => {
             R = radioButton.value;
-            console.log(R)
             drawRect(R)
-            // ctx.clearRect(0, 0, canvasPlot.width, canvasPlot.height);
-            // console.log('Выбрана опция:', R);
-            // ctx.fillStyle = "#5b6ca3"
-            // //Прямоугольник
-            // ctx.fillRect(xAxis - scaleX * R / 2, yAxis - scaleY * R, R / 2 * scaleX, scaleY * R)
-            // ctx.stroke();
-            //
-            // ctx.moveTo(xAxis, yAxis)
-            // ctx.lineTo(xAxis + scaleX * R, yAxis)
-            // ctx.lineTo(xAxis, yAxis - scaleY * R / 2)
-            // ctx.lineTo(xAxis, yAxis)
-            // ctx.fill()
-            //
-            // //Четверть круга
-            // const radiusX = scaleX;
-            // const radiusY = scaleY;
-            //
-            // const startAngle = -Math.PI * 3 / 2;
-            // const endAngle = -Math.PI
-            //
-            // ctx.ellipse(xAxis, yAxis, radiusX * R, radiusY * R, 0, startAngle, endAngle);
-            // ctx.fill();
-            //
-            //
-            // drawAxes()
+
         });
     });
+
+    // svg.addEventListener("click", addPoint);
+    svgOXY.addEventListener("click", addPoint)
+    // svgPoints.addEventListener("click",addPoint)
+
+    function addPoint(event) {
+        let x = event.clientX - svg.getBoundingClientRect().left
+        let y = event.clientY - svg.getBoundingClientRect().top
+
+        // let point = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+        // point.setAttribute("cx", x)
+        // point.setAttribute("cy", y)
+        // point.setAttribute("r", 2)
+        // let selectedRadio = document.querySelector('input[type="radio"]:checked');
+        // let newX = -(250 - x) / 50.0
+        // let newY = (250 - y) / 50.0
+        //
+        //
+        // let t;
+        // requestResponse(["" + newX], "" + newY, selectedRadio, function (status) {
+        //     console.log(status + " addpoint");
+        //     t = status;
+        //     if (t==="Попадание") {
+        //         point.setAttribute("fill", "green")
+        //     }else{
+        //         point.setAttribute("fill", "red")
+        //     }
+        //     // svgOXY.appendChild(point)
+        //     // console.log("svgOXY.appendChild(point)")
+        //     // svg.appendChild(point)
+        //     // console.log("svg.appendChild(point)")
+        //     svgPoints.appendChild(point)
+        //     console.log("svgPoints.appendChild(point)")
+        // });
+
+    }
+    function drawPoint(x, y){
+        let point = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+        point.setAttribute("cx", x)
+        point.setAttribute("cy", y)
+        point.setAttribute("r", 2)
+        let selectedRadio = document.querySelector('input[type="radio"]:checked');
+        let newX = -(250 - x) / 50.0
+        let newY = (250 - y) / 50.0
+
+
+        let t;
+        requestResponse(["" + newX], "" + newY, selectedRadio, function (status) {
+            console.log(status + " addpoint");
+            t = status;
+            if (t==="Попадание") {
+                point.setAttribute("fill", "green")
+            }else{
+                point.setAttribute("fill", "red")
+            }
+            // svgOXY.appendChild(point)
+            // console.log("svgOXY.appendChild(point)")
+            // svg.appendChild(point)
+            // console.log("svg.appendChild(point)")
+            svgPoints.appendChild(point)
+            console.log("svgPoints.appendChild(point)")
+        });
+    }
+
+
 })

@@ -11,4 +11,5 @@ public class RequestReader {
     public Coordinates read(ServletInputStream inputStream) throws IOException {
         return objectMapper.readValue(inputStream, Coordinates.class);
     }
+
 }
