@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+</f:view>
+<h:head>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <link rel="stylesheet" href="src/css/styles.css"/>
+    <script src="./src/js/index.js" type=""></script>
+</h:head>
+<h:body>
+
+    <div id="main">
+        <table id="main_table">
+            <tr>
+                <td id="first_half">
+                    <div id="choose_section">
+                        <h:form id="formId">
+
+                            <div style="display: flex; flex-direction: row; align-items: flex-end;" id="choose_div">
+                                <div style="display: flex; flex-direction: row; gap: 5px;">
+                                    <ui:repeat value="#{hitCheckBean.values}" var="value">
+                                        <div style="display: flex; flex-direction: column; align-items: center;">
+                                            <h:selectBooleanCheckbox value="#{hitCheckBean.selectedValues[value]}" style="transform: scale(1.5);">
+                                                <f:selectItem itemValue="#{value}" />
+                                            </h:selectBooleanCheckbox>
+                                            <h:outputLabel value="#{value}" style="margin-top: 3px;" />
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                                <h:inputHidden id="inputX" value="#{hitCheckBean.pointX}" />
+                                <h:inputHidden id="inputY" value="#{hitCheckBean.pointY}" />
+                                <!-- Остальные элементы, которые нужно разместить в строку -->
+                                <h:inputText value="#{hitCheckBean.y}" id="yValue" styleClass="yInput" type="number" min="-3" max="5" step="any"/>
+
+                                <div style="display: flex; flex-direction: column;" id="rSlider">
+                                    <!-- Слайдер -->
+                                    <p:slider widgetVar="rSlider" onSlide="updateTextInput(event, ui)" for="rValue" minValue="2" maxValue="5" step="0.25" styleClass="rSlider"/>
+                                    <p:inputText id="rValue" value="#{hitCheckBean.r}" styleClass="rInput"/>
+                                </div>
+
+                            </div>
+
+
+                            <div class="buttons">
+                                <p:commandButton id="submit" styleClass="hitButton" value="Hit" action="#{hitCheckBean.hitResult()}"
+                                                 update="dataTable"/>
+                                <div class="spacerButtons"></div>
+                                <p:commandButton styleClass="clearButton" value="Clear" action="#{hitCheckBean.clear()}"
+                                                 update="dataTable"/>
+                                <div class="spacerButtons"></div>
+                                <p:commandButton action="#{navigationBean.goToStarter()}" value="Back"/>
+                                <h:commandButton id="addPoint" style="display: none;" action="#{hitCheckBean.addPoint()}" />
+                            </div>
+                        </h:form>
+                        <script type="text/javascript">
+
+
+                        </script>
+                    </div>
+                    <div id="svg_section">
+                        <svg id="OXY" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="0" y1="250" x2="500" y2="250" stroke="white"></line>
+                            <text x="0" y="240" text-anchor="middle" fill="white">-5</text>
+                            <text x="50" y="240" text-anchor="middle" fill="white">-4</text>
+                            <text x="100" y="240" text-anchor="middle" fill="white">-3</text>
+                            <text x="150" y="240" text-anchor="middle" fill="white">-2</text>
+                            <text x="200" y="240" text-anchor="middle" fill="white">-1</text>
+                            <text x="300" y="240" text-anchor="middle" fill="white">1</text>
+                            <text x="350" y="240" text-anchor="middle" fill="white">2</text>
+                            <text x="400" y="240" text-anchor="middle" fill="white">3</text>
+                            <text x="450" y="240" text-anchor="middle" fill="white">4</text>
+                            <text x="500" y="240" text-anchor="middle" fill="white">5</text>
+
+                            <!-- Ось Y -->
+                            <line x1="250" y1="0" x2="250" y2="500" stroke="white"></line>
+                            <text x="240" y="0" text-anchor="middle" fill="white">5</text>
+                            <text x="240" y="50" text-anchor="middle" fill="white">4</text>
+                            <text x="240" y="100" text-anchor="middle" fill="white">3</text>
+                            <text x="240" y="150" text-anchor="middle" fill="white">2</text>
+                            <text x="240" y="200" text-anchor="middle" fill="white">1</text>
+                            <text x="240" y="300" text-anchor="middle" fill="white">-1</text>
+                            <text x="240" y="350" text-anchor="middle" fill="white">-2</text>
+                            <text x="240" y="400" text-anchor="middle" fill="white">-3</text>
+                            <text x="240" y="450" text-anchor="middle" fill="white">-4</text>
+                            <text x="220" y="500" text-anchor="middle" fill="white">-5</text>
+                        </svg>
+                        <svg id="svg_graph" xmlns="http://www.w3.org/2000/svg"/>
+                        <svg id="points" xmlns="http://www.w3.org/2000/svg"/>
+                    </div>
+                    <!--
+                    <!-                        </div>-->
+                    <!--                    </div>-->
+
+                </td>
+
+
+                <td id="second_half">
+                    <div id="table_result">
+                        <h:dataTable value="#{hitCheckBean.hits}" var="h" styleClass="custom-table" id="dataTable">
+                            <h:column styleClass="X">
+                                <f:facet name="header">X</f:facet>
+                                #{h.getX()}
+                            </h:column>
+                            <h:column styleClass="Y">
+                                <f:facet name="header">Y</f:facet>
+                                #{h.getY()}
+                            </h:column>
+                            <h:column styleClass="R">
+                                <f:facet name="header">R</f:facet>
+                                #{h.getR()}
+                            </h:column>
+                            <h:column styleClass="Status">
+                                <f:facet name="header">Status</f:facet>
+                                #{h.getStatus()}
+                            </h:column>
+                            <h:column styleClass="Date">
+                                <f:facet name="header">Date</f:facet>
+                                #{h.getDate()}
+                            </h:column>
+                            <h:column styleClass="Time">
+                                <f:facet name="header">Execution time</f:facet>
+                                #{h.getTime()}
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</h:body>
+
+</html>

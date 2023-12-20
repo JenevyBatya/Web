@@ -1,0 +1,169 @@
+body {
+    background-image: url("../img/snap5.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+#main_table {
+    width: 90%;
+    margin-top: 6%;
+    /*border: 1px solid red;*/
+    margin-left: 2.3%;
+    border-collapse: separate;
+    border-spacing: 30px 0;
+
+    /*margin-right: 100px;*/
+
+}
+
+/*#first_half, #second_half {*/
+
+/*    margin-top: 128px;*/
+/*    border: 1px solid red;*/
+/*}*/
+
+#first_half {
+
+    height: 630px;
+    width: 690px;
+    /*border: 1px solid greenyellow;*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#second_half {
+
+    width: 850px;
+    height: 630px;
+    /*border: 1px solid blueviolet;*/
+
+}
+
+#table_result {
+    margin-top: 30px;
+    margin-right: 110px;
+    height: 100%;
+    /*border: 1px solid deepskyblue;*/
+
+}
+
+#table_x, #table_y, #table_r {
+    width: 10%;
+}
+
+
+#table_status, #table_time, #table_date {
+    width: 20%;
+}
+
+#table_for_results th {
+    text-align: center;
+}
+
+#choose_section {
+    width: 100%;
+    height: 90px;
+    /*border: 1px solid orange;*/
+    padding-top: 20px;
+}
+
+#svg_section {
+    margin-top: 1px;
+    height: 465px;
+    border: 1px solid black;
+    display: flex; /* Использовать flexbox */
+    justify-content: center; /* Центрировать по горизонтали */
+    align-items: center; /* Центрировать по вертикали */
+    width: 100%;
+    position: relative;
+    background: rgb(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+
+    /* Другие стили родительского div */
+}
+
+#OXY {
+    width: 500px;
+    height: 450px;
+    /*margin-top: 10px;*/
+    margin-bottom: 10px;
+    position: absolute;
+    z-index: 2;
+}
+
+#svg_graph, #points {
+    width: 500px;
+    height: 450px;
+    /*margin-top: 10px;*/
+    margin-bottom: 10px;
+    position: absolute;
+    z-index: 1;
+
+}
+
+#svg_border {
+    height: 550px;
+    width: 550px;
+    border: 1px solid black;
+    margin-bottom: 100px;
+}
+
+
+.chooseSection {
+    margin-top: 10px;
+    margin-left: 20px;
+
+}
+
+
+
+.yInput {
+    height: 40px;
+    border-radius: 5px; /* Пример радиуса скругления углов */
+    margin-left: 20px;
+    width: 60px;
+    /*background-color: #80755e; !* Цвет фона - коричневый *!*/
+    /*color: white;*/
+    /*font-family: Papyrus, serif;*/
+    text-align: center;
+}
+#rSlider{
+    margin-left: 20px;
+    width: 90px;
+
+}
+#rValue, .rInput{
+    color: white;
+    font-family: Papyrus, serif;
+    text-align: center;
+    background-color: #80755e; /* Цвет фона - коричневый */
+}
+.X, .Y, .R {
+    width: 55px;
+}
+
+.Status, .Date {
+    width: 85px;
+}
+
+.custom-table {
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    line-height: 2; /* Устанавливает расстояние между строками в два раза больше, чем размер шрифта */
+}
+
+
+.buttons {
+    margin-left: 440px;
+    margin-bottom: 50px;
+    margin-top: -40px;
+    display: flex;
+}
+
+.spacerButtons {
+    width: 30px;
+}

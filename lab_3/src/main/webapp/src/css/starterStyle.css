@@ -1,0 +1,18 @@
+body{
+    background-image: url("../img/starter.png");
+}
+#name{
+    padding:20px;
+    background: rgba(149, 18, 215, 0.47);
+    border-radius: 5px;
+}
+.custom-button {
+    background-color: navy; /* Dark blue color for the button */
+    color: white; /* Text color for better contrast */
+    /* You can add more styles as needed */
+
+}
+#button{
+    padding-top: 100px;
+    height: 100px;
+}
