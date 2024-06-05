@@ -1,0 +1,120 @@
+#main {
+  height: 500px;
+  display: grid;
+  place-items: center;
+  /* background-color: aqua; */
+  margin-top: 10px;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+#form {
+  border: 1px salmon solid;
+  padding: 30px;
+  background: rgba(216, 204, 204, 0.3);
+
+}
+
+div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  /* Отступ между подписями и полями ввода */
+}
+
+label {
+  width: 100px;
+  /* Фиксированная ширина для подписей (подстройте под ваши нужды) */
+  margin-right: 20px;
+  /* Отступ между подписью и полем ввода */
+}
+
+input {
+  flex: 1;
+  /* Занимает все доступное пространство */
+  border-radius: 10px;
+  height: 30px;
+}
+
+button {
+  height: 40px;
+  border-radius: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  border: 0px;
+  font-size: 15px;
+
+
+
+
+}
+
+
+.grad-button {
+  background-image: linear-gradient(to right, #1d1b5e 0%, #bfe9ff 70%, #1d1b5e 100%);
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+}
+
+.grad-button:hover {
+  color: #fff;
+  box-shadow: 0 0 20px #dd9999;
+  text-decoration: none;
+}
+
+.grad-button:disabled {
+  opacity: 0.5;
+  box-shadow: none;
+  background-image: linear-gradient(to right, #1d1b5e 0%, #ffbffa 70%, #1d1b5e 100%);
+}
+
+
+:root {
+  /* violet */
+  --primary-color: 111, 76, 255;
+
+  /* white */
+  --text-color: 256, 256, 256;
+}
+
+.btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  padding: 12px 32px;
+  margin: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border-radius: 50px;
+  color: white;
+}
+
+.btn-glow:hover {
+  /* box-shadow: rgba(var(--primary-color), 0.5) 0px 0px 20px 0px; */
+  box-shadow: 0 0 20px #dd9999;
+}
+
+/* https://sushi.com/ */
+.btn-gradient {
+  background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
+  border: 0;
+  color: rgba(var(--text-color));
+}
+
+/* https://sushi.com/ */
+.btn-gradient-border {
+  color: rgba(var(--text-color));
+  border: 2px double transparent;
+  background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Планшетный */
+@media (min-width: 774px) and (max-width: 1193px) {}
+
+/* Мобильный */
+@media (max-width: 773px) {}

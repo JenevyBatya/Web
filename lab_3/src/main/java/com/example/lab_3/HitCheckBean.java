@@ -127,7 +127,7 @@ public class HitCheckBean {
             status = "Попадание";
         } else if (getPointX() > 0 && getPointY() < 0 && (getPointX() * getPointX() + getPointY() * getPointY() < (getR() * getR()))) {
             status = "Попадание";
-        } else if (getPointX() < 0 && getPointY() < 0 && getPointY() >= (-0.5 * getPointX() - getR() * 0.5)) {
+        } else if (getPointX() < 0 && getPointY() < 0) {
             status = "Попадание";
         } else {
             status = "Промах";

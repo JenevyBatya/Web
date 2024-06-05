@@ -1,0 +1,35 @@
+<body>
+    <div id="main">
+        <div id="form">
+            <form (ngSubmit)="submitForm()" #loginForm="ngForm" *ngIf="!isLoggedIn; else loggedInBlock">
+                <div>
+                    <label for="login">Логин:</label>
+                    <input type="text" id="login" name="login" [(ngModel)]="user.login" required="">
+                </div>
+                <div>
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" [(ngModel)]="user.password" required="">
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <mat-spinner style="width: 20px; height: 20px;" *ngIf="isWaitingForAnAnswer"></mat-spinner>
+                </div>
+                <button type="submit" [disabled]="(!loginForm.valid || isWaitingForAnAnswer)" id="in-button" class="grad-button">Вход в
+                    систему</button>
+
+            </form>
+            <!-- <div *ngIf="isWaitingForAnAnswer">
+                <mat-spinner></mat-spinner>
+            </div> -->
+            <ng-template #loggedInBlock>
+                <div style="display: grid; grid-row: auto;">
+                    <p>Добро пожаловать, мастер</p><br>
+                    <img [src]="'assets/img/loli1.gif'" alt="Пощады" style="width: 450px; height: 300px;"><br>
+                    <div style="display: flex; justify-content: center;">
+                        <button (click)="toMain() " class="btn btn-gradient-border btn-glow;" style="color: white;">Поиграем?</button>
+                    </div>
+                </div>
+
+            </ng-template>
+        </div>
+    </div>
+</body>

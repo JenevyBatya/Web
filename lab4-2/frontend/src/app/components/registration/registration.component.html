@@ -1,0 +1,17 @@
+<body>
+    <div id="main">
+        <div id="form">
+            <form (ngSubmit)="submitForm()" #loginForm="ngForm" *ngIf="!isLoggedIn;">
+                <div>
+                    <label for="login">Логин:</label>
+                    <input type="text" id="login" name="login" [(ngModel)]="user.login" required="">
+                </div>
+                <div>
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" [(ngModel)]="user.password" required="">
+                </div>
+                <button type="submit" [disabled]="!loginForm.valid">Регистрация</button>
+            </form>
+        </div>
+    </div>
+</body>

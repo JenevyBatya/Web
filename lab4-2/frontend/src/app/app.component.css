@@ -1,0 +1,11 @@
+body, html{
+  background-image: url("../assets/img/starter.png");
+  /* background-color: #5e4da8; */
+  height: 97dvh;
+  background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 1px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}

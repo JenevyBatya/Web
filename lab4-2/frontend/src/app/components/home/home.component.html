@@ -1,0 +1,58 @@
+<div id="main">
+    <div id="selection_box">
+        <div id="slider-x">
+            <label style="width: 20%; padding-right: 10px; margin-left: 10px;">X</label>
+            <input type="text" pInputText [(ngModel)]="valueX" class="w-full" value="X" />
+            <p-slider [(ngModel)]="valueX" [min]="0" [max]="3" [min]="-5" class="w-full" id="sliderX"></p-slider>
+        </div>
+        <div id="text-y" style="display:grid;">
+            <label>Y</label>
+            <input type="text" id="inputY">
+
+        </div>
+        <div id="slider-r">
+            <label style="width: 20%; padding-right: 10px; margin-left: 10px;">R</label>
+            <input type="text" pInputText [(ngModel)]="valueR" class="w-full" />
+            <p-slider [(ngModel)]="valueR" [min]="0" [max]="3" [min]="0" class="w-full" id="sliderR"></p-slider>
+        </div>
+        <div id="buttons">
+            <button type="button" (click)="postData()">Стрелять</button>
+            <button type="button" (click)="clearTable()">Очистить</button>
+        </div>
+        <label *ngIf="isError" style="color: red;">Впишите Y</label>
+    </div>
+
+    <div id="svg_box">
+        <div id="svg_border">
+            <svg id="svg_OXY" appSvgResize (click)="svgClick($event)"></svg>
+            <svg id="svg_graph" appDrawFigures [radius]="valueR"></svg>
+            <svg id="svg_points"></svg>
+        </div>
+    </div>
+    <div id="mobile-gap"></div>
+    <div id="table_box">
+        <table style="width: 100%;" id="table">
+            <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Статус</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of hitCheckList">
+                    <td>{{item.x}}</td>
+                    <td>{{item.y}}</td>
+                    <td>{{item.r}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.time}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>

@@ -1,0 +1,47 @@
+#main {
+  height: 500px;
+  display: grid;
+  place-items: center;
+  /* background-color: aqua; */
+  margin-top: 10px;
+  text-align: center;
+
+}
+
+#form {
+  border: 1px salmon solid;
+  padding: 30px;
+  background: rgba(216, 204, 204, 0.3);
+}
+
+div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  /* Отступ между подписями и полями ввода */
+}
+
+label {
+  width: 100px;
+  /* Фиксированная ширина для подписей (подстройте под ваши нужды) */
+  margin-right: 20px;
+  /* Отступ между подписью и полем ввода */
+}
+
+input {
+  flex: 1;
+  /* Занимает все доступное пространство */
+  border-radius: 10px;
+}
+
+button {
+  height: 30px;
+  border-radius: 10px;
+}
+
+
+/* Планшетный */
+@media (min-width: 774px) and (max-width: 1193px) {}
+
+/* Мобильный */
+@media (max-width: 773px) {}

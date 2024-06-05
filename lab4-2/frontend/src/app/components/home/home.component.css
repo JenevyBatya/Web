@@ -1,0 +1,137 @@
+#main {
+    margin-top: 20px;
+    /* height: 85dv; */
+    /* align-items: center; */
+    display: grid;
+    grid-template-columns: 200px 600px 0 500px;
+    justify-content: center;
+    text-align: center;
+
+
+}
+
+#svg_OXY {
+    border: 1px salmon solid;
+    background: rgba(216, 204, 204, 0.3);
+    position: absolute;
+    z-index: 1;
+}
+
+#svg_points {
+    /* position: absolute; */
+    z-index: 1;
+    /* height: 500px; */
+}
+
+#svg_graph {
+    /* position: absolute; */
+    z-index: 2;
+}
+
+#table_box {
+    border: 1px salmon solid;
+    background: rgba(216, 204, 204, 0.3);
+    height: fit-content;
+    max-height: 500px;
+    overflow-y: auto;
+
+
+}
+
+#selection_box {
+    padding-top: 20px;
+    border: 1px salmon solid;
+    background: rgba(216, 204, 204, 0.3);
+    display: grid;
+    grid-template-rows: repeat(4, 50px);
+    row-gap: 20px;
+    height: fit-content;
+}
+
+button {
+    height: 40px;
+}
+#sliderX,
+#sliderY,
+input {
+    width: 90%;
+    height: 70%;
+}
+#inputY{
+    margin-left: 5%;
+    height: 150%;
+}
+
+/* Планшетный */
+@media (min-width: 774px) and (max-width: 1193px) {
+    #main {
+        grid-template-columns: 100px 344px 0 300px;
+        column-gap: 10px;
+        font-size: 10px;
+    }
+
+    #sliderX,
+    #sliderY,
+    input {
+        width: 90%;
+        height: 50%;
+    }
+    #inputY{
+        height: 100%;
+    }
+
+    button {
+        height: 18px;
+        font-size: 10px;
+
+    }
+    #table_box{
+        max-height: 344px;
+    }
+}
+
+/* Мобильный */
+@media (max-width: 773px) {
+    #main {
+        grid-template-columns: 100px 344px;
+
+        column-gap: 10px;
+        font-size: 10px;
+    }
+
+    #sliderX,
+    #sliderY,
+    input {
+        width: 90%;
+        height: 35%;
+    }
+    #inputY{
+        height: 50%;
+    }
+
+    button {
+        height: 18px;
+        font-size: 10px;
+
+    }
+
+    #table_box {
+        margin-top: -120px;
+        margin-left: -110px;
+        margin-right: 20px;
+        height: fit-content;
+
+    }
+
+    #mobile-gap {
+        width: 0;
+    }
+    #table_box{
+        max-height: 300px;
+    }
+
+    /* #svg_points{
+        margin-top: -300px;
+    } */
+   
+}

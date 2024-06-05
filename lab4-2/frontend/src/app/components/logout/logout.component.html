@@ -1,0 +1,16 @@
+<div id="nav-bar">
+    <div id="button-div">
+        <div *ngIf="isLoggedIn; else notLoggedIn">
+            <button type="button" (click)="logout()"  id="logout-buttton">Выход</button>
+            <button type="button" (click)="starter()" id="starter-button" *ngIf="isMainPage()">Начальная</button>
+        </div>
+        <ng-template #notLoggedIn>
+            <button *ngIf="!isSignupPage()" (click)="signup()">Регистрация</button>
+            <button *ngIf="!isStarterPage()" (click)="starter()">Авторизация</button>
+        </ng-template>
+    </div>
+    <div id="name-div">
+        Черневская Карина P3224<br>
+        Вариант 412355
+    </div>
+</div>
